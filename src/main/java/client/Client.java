@@ -32,7 +32,7 @@ public class Client {
 			else if (option == 0){
 				System.exit(0);
 			}
+		sc.close();
 		}
-
 	}
 }
