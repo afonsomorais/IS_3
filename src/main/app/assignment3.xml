@@ -22,13 +22,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 VALUES (#[message.inboundProperties.'http.query.params'.get("email")], #[message.inboundProperties.'http.query.params'.get("course")])]]></db:parameterized-query>
         </db:insert>
     </flow>
-    <flow name="assignment3Flow1">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/Soap" doc:name="HTTP"/>
-        <cxf:jaxws-service serviceClass="assignment3.MyWebService" doc:name="CXF"/>
-        <component doc:name="Java">
-            <singleton-object class="assignment3.MyWebService"/>
-        </component>
-    </flow>
     <flow name="RemoveSubscriptionFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/Unsubscribe" doc:name="HTTP"/>
         <logger level="INFO" doc:name="Logger"/>
@@ -38,5 +31,18 @@ VALUES (#[message.inboundProperties.'http.query.params'.get("email")], #[message
         <db:delete config-ref="MySQL_Configuration" doc:name="Database">
             <db:parameterized-query><![CDATA[DELETE FROM subscribers where email=#[message.inboundProperties.'http.query.params'.get("email")] AND course= #[message.inboundProperties.'http.query.params'.get("course")]]]></db:parameterized-query>
         </db:delete>
+    </flow>
+    <flow name="SoapAddSubscriptionFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/Soap" doc:name="HTTP"/>
+        <cxf:jaxws-service serviceClass="assignment3.MyWebService" doc:name="CXF"/>
+        <component doc:name="Java">
+            <singleton-object class="assignment3.MyWebService"/>
+        </component>
+        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)]" doc:name="Variable Email"/>
+        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]" doc:name="Variable Course"/>
+        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
+VALUES (#[message.inboundProperties.'http.query.params'.get("email")], #[message.inboundProperties.'http.query.params'.get("course")])]]></db:parameterized-query>
+        </db:insert>
     </flow>
 </mule>
