@@ -21,9 +21,9 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
         <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]" doc:name="Variable Course"/>
         <db:insert config-ref="MySQL_Configuration" doc:name="Database">
             <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
-VALUES (#[message.inboundProperties.'http.query.params'.get("email")], #[message.inboundProperties.'http.query.params'.get("course")])]]></db:parameterized-query>
+VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         </db:insert>
-        <smtp:outbound-endpoint host="smtp.gmail.com" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="afonso_v_morais@hotmail.com" from="issubscribertest" subject="Testar isto" responseTimeout="10000" doc:name="SMTP Verification"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Testar isto" responseTimeout="10000" doc:name="SMTP Verification"/>
     </flow>
     <flow name="RemoveSubscriptionFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/Unsubscribe" doc:name="HTTP"/>
