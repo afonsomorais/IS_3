@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <sub-flow name="remove_subscription_send_email_sub_flow">
+        <db:delete config-ref="MySQL_Configuration" doc:name="Remove Subscription Database">
+            <db:parameterized-query><![CDATA[DELETE FROM subscribers WHERE email = #[flowVars.email] AND course = #[flowVars.course];]]></db:parameterized-query>
+        </db:delete>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Testar isto" responseTimeout="10000" doc:name="Removal Subscription Verification"/>
+    </sub-flow>
+    <flow name="web_new_remove_subscription_flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/Unsubscribe" doc:name="HTTP"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <set-payload value="Hello #[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)], you successfully unsubscribed to #[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]." doc:name="Set Payload"/>
+        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)]" doc:name="Variable Email"/>
+        <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]" doc:name="Variable Course"/>
+        <flow-ref name="remove_subscription_send_email_sub_flow" doc:name="remove_subscription_send_email_sub_flow"/>
+    </flow>
+    <flow name="soap_remove_subscription_flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/Soap2" doc:name="HTTP"/>
+        <cxf:jaxws-service serviceClass="assignment3.MyWebService" doc:name="CXF"/>
+        <component doc:name="Java">
+            <singleton-object class="assignment3.MyWebService"/>
+        </component>
+    </flow>
+</mule>

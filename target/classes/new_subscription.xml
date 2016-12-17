@@ -13,17 +13,23 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
     <db:mysql-config name="MySQL_Configuration" host="localhost" port="3306" user="test" password="test" database="subscriptiondb" doc:name="MySQL Configuration"/>
     <smtp:gmail-connector name="Gmail"  validateConnections="true" doc:name="Gmail"/>
-    <flow name="new_subscription_flow">
+    <sub-flow name="new_subscription_send_email_sub_flow">
+        <db:insert config-ref="MySQL_Configuration" doc:name="Insert New Subscription Database">
+            <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
+VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
+        </db:insert>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Testar isto" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
+        <db:update config-ref="MySQL_Configuration" doc:name="Update Number of Emails Sent">
+            <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
+        </db:update>
+    </sub-flow>
+    <flow name="web_new_subscription_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/Subscribe" doc:name="HTTP"/>
         <logger level="INFO" doc:name="Logger"/>
         <set-payload value="Hello #[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)], you successfully subscribed to #[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]." doc:name="Set Payload"/>
         <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)]" doc:name="Variable Email"/>
         <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]" doc:name="Variable Course"/>
-        <db:insert config-ref="MySQL_Configuration" doc:name="New Subscription Database">
-            <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
-VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
-        </db:insert>
-        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Testar isto" responseTimeout="10000" doc:name="SMTP Verification"/>
+    	<flow-ref name="new_subscription_send_email_sub_flow" doc:name="new_subscription_send_email_sub_flow"/>
     </flow>
     <flow name="soap_new_subscription_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/Soap" doc:name="HTTP"/>
