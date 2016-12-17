@@ -18,7 +18,7 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
             <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
 VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         </db:insert>
-        <set-payload value="Confirm your subscription here: http://localhost:8081/link" doc:name="Set Payload Message Subscription"/>
+        <set-payload value="Confirm your subscription here: http://localhost:8081/confirm_by_email/?email=#[flowVars.email]" doc:name="Set Payload Message Subscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Subscribe" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
         <db:update config-ref="MySQL_Configuration" doc:name="Update Number of Emails Sent">
             <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>

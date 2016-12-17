@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <set-payload value="Confirm your unsubscription here: http://localhost:8081/link" doc:name="Set Payload Message Unsubscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Unsubscribe" responseTimeout="10000" doc:name="Remove Subscription Verification"/>
     </sub-flow>
-    <flow name="web_new_remove_subscription_flow">
+    <flow name="web_remove_subscription_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/web_unsubscribe" doc:name="HTTP"/>
         <logger level="INFO" doc:name="Logger"/>
         <set-payload value="Hello #[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)], you successfully unsubscribed to #[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]." doc:name="Set Payload"/>

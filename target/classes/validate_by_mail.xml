@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/current/mule-twitter.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <twitter:config name="Twitter__Configuration" accessKey="701969017007906816-rHxaBylFQqUe9il823Vl4JcqBmdLt6H" accessSecret="TVqIrebt7hDjocYndp4h4NQvsokdIwIeESIyf45UaN7vQ" consumerKey="3r5zRELuxYVF7xVrno3cZBgyU" consumerSecret="dOYxtQ24fL5SW9z698HQI7zuHSEpMq84IFcpDKiilefWR2YOaJ" doc:name="Twitter: Configuration"/>
+    <flow name="web_validate_by_email_flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/confirm_by_email/" doc:name="HTTP"/>
+        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.email]" doc:name="Variable Email"/>
+        <db:update config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[UPDATE subscribers SET validated = 1 WHERE email = #[flowVars.email];]]></db:parameterized-query>
+        </db:update>
+        <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
+        <flow-ref name="twitter_statistics_sub_flow" doc:name="twitter_statistics_flow"/>
+    </flow>
+    <sub-flow name="twitter_statistics_sub_flow">
+        <db:select config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[SELECT * FROM statistics;]]></db:parameterized-query>
+        </db:select>
+        <set-payload value="Statistics: #[message.payload.'courses_n'] courses, #[message.payload.'email_n_d'] emails sent today, #[message.payload.'emails_n_e'] emails since this is up. Ah, e j&#225; agora, o Bruno &#233; um palha&#231;o que n&#227;o trabalha" doc:name="Set Payload Twitter"/>
+        <twitter:update-status config-ref="Twitter__Configuration" status="#[message.payload]" doc:name="Twitter"/>
+    </sub-flow>
+</mule>
