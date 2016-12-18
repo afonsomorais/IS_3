@@ -3,9 +3,10 @@ package client;
 import java.util.*;
 
 public class Client {
+	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		int option = 0;
-		Scanner sc = new Scanner(System.in);
+
 		while(true) {
 			do {
 				try {
@@ -21,10 +22,11 @@ public class Client {
 				}
 			} while(option < 0 || option > 3);
 			if (option == 1){
-				//add subscription
+				new_subscription();
+				break;
 			}
 			else if (option == 2){
-				//delete subscription
+				delete_subscription();
 			}
 			else if (option == 3){
 				//list current subscriptions
@@ -32,7 +34,23 @@ public class Client {
 			else if (option == 0){
 				System.exit(0);
 			}
-		sc.close();
 		}
+		sc.close();
+	}
+	
+	public static void new_subscription(){
+		String email, course;
+		System.out.println("Insert your e-mail: ");
+		email = sc.nextLine();
+		System.out.println("Insert the course you want to subscribe: ");
+		course = sc.nextLine();
+	}
+	
+	public static void delete_subscription(){
+		String email, course;
+		System.out.println("Insert your e-mail: ");
+		email = sc.nextLine();
+		System.out.println("Insert the course you want to unsubscribe: ");
+		course = sc.nextLine();
 	}
 }
