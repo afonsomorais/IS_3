@@ -25,5 +25,8 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
         <logger message="twitter input: #[message.payload]" level="INFO" doc:name="Logger"/>
         <twitter:update-status config-ref="Twitter__Configuration" status="#[message.payload]" doc:name="Twitter"/>
         <logger message="twitter message: #[message.payload]" level="INFO" doc:name="Logger"/>
+        <db:update config-ref="MySQL_Configuration" doc:name="Edit Daily Mails Database">
+            <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = 0;]]></db:parameterized-query>
+        </db:update>
     </flow>
 </mule>
