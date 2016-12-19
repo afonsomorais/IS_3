@@ -20,7 +20,6 @@ VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         </db:insert>
         <set-payload value="Confirm your subscription here: http://localhost:8081/confirm_by_email/?email=#[flowVars.email]" doc:name="Set Payload Message Subscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Subscribe" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
-        <flow-ref name="post_twitter_sub_flow" doc:name="post_twitter_sub_flow"/>
         <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
     </sub-flow>
     <flow name="soap_new_subscription_flow">
