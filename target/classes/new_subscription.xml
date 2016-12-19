@@ -18,10 +18,18 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
             <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
 VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         </db:insert>
-        <set-payload value="Confirm your subscription here: http://localhost:8081/confirm_by_email/?email=#[flowVars.email]" doc:name="Set Payload Message Subscription"/>
+        <set-payload value="Confirm your subscription here: http://localhost:8081/validatesubscription/?email=#[flowVars.email]&amp;course=#[flowVars.course]" doc:name="Set Payload Message Subscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Subscribe" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
         <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
     </sub-flow>
+    <flow name="new_subscription_flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/validatesubscription/" doc:name="HTTP" allowedMethods="GET, POST"/>
+        <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.course]" doc:name="Variable Course"/>
+        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.email]" doc:name="Variable Email"/>
+        <db:update config-ref="MySQL_Configuration" doc:name="Validate Subscription Database">
+            <db:parameterized-query><![CDATA[UPDATE subscribers SET validated = 1 WHERE (email = #[flowVars.email] AND course = #[flowVars.course]);]]></db:parameterized-query>
+        </db:update>
+    </flow>
     <flow name="soap_new_subscription_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_subscribe" doc:name="HTTP" allowedMethods="GET,POST"/>
         <cxf:jaxws-service serviceClass="soap.Subscription" doc:name="CXF"/>
