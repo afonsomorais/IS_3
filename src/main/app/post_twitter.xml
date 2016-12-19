@@ -20,7 +20,5 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
         <logger message="twitter input: #[message.payload]" level="INFO" doc:name="Logger"/>
         <twitter:update-status config-ref="Twitter__Configuration" status="#[message.payload]" doc:name="Twitter"/>
         <logger message="twitter message: #[message.payload]" level="INFO" doc:name="Logger"/>
-    	<json:object-to-json-transformer doc:name="Object to JSON"/>
-        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to HashMap"/>
     </sub-flow>
 </mule>

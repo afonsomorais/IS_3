@@ -16,11 +16,9 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
             <db:parameterized-query><![CDATA[SELECT * FROM statistics LIMIT 1;]]></db:parameterized-query>
         </db:select>
         <logger message="Database msg #[message.payload]" level="INFO" doc:name="Logger"/>
-        <set-payload value="Statistics: #[message.payload[0].emails_n_d] daily mails, #[message.payload[0].emails_n_e] mails since ever, #[message.payload[0].courses_e] courses" doc:name="Set Payload Message Twitter"/>
+        <set-payload value="Statistics: #[message.payload[0].emails_n_d] daily mails, #[message.payload[0].emails_n_e] mails since ever, #[message.payload[0].courses_n] courses" doc:name="Set Payload Message Twitter"/>
         <logger message="twitter input: #[message.payload]" level="INFO" doc:name="Logger"/>
         <twitter:update-status config-ref="Twitter__Configuration" status="#[message.payload]" doc:name="Twitter"/>
         <logger message="twitter message: #[message.payload]" level="INFO" doc:name="Logger"/>
-    	<json:object-to-json-transformer doc:name="Object to JSON"/>
-        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to HashMap"/>
     </sub-flow>
 </mule>
