@@ -9,6 +9,7 @@ import artifact_unsubscription.Unsubscription;
 
 public class Client {
 	static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		int option = 0;
 
@@ -24,6 +25,7 @@ public class Client {
 					option = Integer.parseInt(sc.nextLine());
 				} catch(NumberFormatException e) {
 					System.out.println("Insert a valid number");
+					System.exit(0);
 				}
 			} while(option < 0 || option > 3);
 			if (option == 1){
@@ -33,40 +35,40 @@ public class Client {
 				delete_subscription();
 			}
 			else if (option == 3){
-				//list current subscriptions
+				list_subscriptions();
 			}
 			else if (option == 0){
 				System.exit(0);
 			}
 		}
-	
 	}
 	
 	public static void new_subscription(){
 		String email, course;
-		System.out.println("Insert your e-mail: ");
+		System.out.print("Insert your e-mail: ");
 		email = sc.nextLine();
-		System.out.println("Insert the course you want to subscribe: ");
+		System.out.print("Insert the course you want to subscribe: ");
 		course = sc.nextLine();
-	
 		SubscriptionService as = new SubscriptionService();
 		Subscription asp = as.getSubscriptionPort();
 		
 		asp.setParams(email, course);
-		
-		
 	}
 	
 	public static void delete_subscription(){
 		String email, course;
-		System.out.println("Insert your e-mail: ");
+		System.out.print("Insert your e-mail: ");
 		email = sc.nextLine();
-		System.out.println("Insert the course you want to unsubscribe: ");
+		System.out.print("Insert the course you want to unsubscribe: ");
 		course = sc.nextLine();
 		
 		UnsubscriptionService as = new UnsubscriptionService();
 		Unsubscription asp = as.getUnsubscriptionPort();
 		
 		asp.setParams(email, course);
+	}
+	
+	public static void list_subscriptions(){
+		
 	}
 }
