@@ -14,22 +14,15 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <db:delete config-ref="MySQL_Configuration" doc:name="Remove Subscription Database">
             <db:parameterized-query><![CDATA[DELETE FROM subscribers WHERE email = #[flowVars.email] AND course = #[flowVars.course];]]></db:parameterized-query>
         </db:delete>
-        <set-payload value="Confirm your unsubscription here: http://localhost:8081/link" doc:name="Set Payload Message Unsubscription"/>
+        <set-payload value="Confirm your unsubscription here: http://localhost:8081/remove_by_email/?email=#[flowVars.email]" doc:name="Set Payload Message Unsubscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Unsubscribe" responseTimeout="10000" doc:name="Remove Subscription Verification"/>
     </sub-flow>
-    <flow name="web_remove_subscription_flow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/web_unsubscribe" doc:name="HTTP"/>
-        <logger level="INFO" doc:name="Logger"/>
-        <set-payload value="Hello #[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)], you successfully unsubscribed to #[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]." doc:name="Set Payload"/>
-        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)]" doc:name="Variable Email"/>
-        <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]" doc:name="Variable Course"/>
-        <flow-ref name="remove_subscription_send_email_sub_flow" doc:name="remove_subscription_send_email_sub_flow"/>
-    </flow>
     <flow name="soap_remove_subscription_flow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_unsubsribe" doc:name="HTTP"/>
-        <cxf:jaxws-service serviceClass="assignment3.MyWebService" doc:name="CXF"/>
-        <component doc:name="Java">
-            <singleton-object class="assignment3.MyWebService"/>
-        </component>
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_unsubscribe" doc:name="HTTP"/>
+        <cxf:jaxws-service  doc:name="CXF" serviceClass="soap.Unsubscription"/>
+        <custom-transformer returnClass="java.util.HashMap" class="soap.PutSubscription" doc:name="Java"/>
+        <set-variable variableName="course" value="#[message.payload['course']]" doc:name="Variable Course"/>
+        <set-variable variableName="email" value="#[message.payload['email']]" doc:name="Variable Email"/>
+        <flow-ref name="remove_subscription_send_email_sub_flow" doc:name="remove_subscription_send_email_sub_flow"/>
     </flow>
 </mule>

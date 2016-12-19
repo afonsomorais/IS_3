@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
-    <db:mysql-config name="MySQL_Configuration" host="localhost" port="3306" user="test" password="test" database="subscriptiondb" doc:name="MySQL Configuration"/>
+    <db:mysql-config name="MySQL_Configuration" host="localhost" port="3306" user="test"  database="subscriptiondb" doc:name="MySQL Configuration" password="test"/>
     <smtp:gmail-connector name="Gmail"  validateConnections="true" doc:name="Gmail"/>
     <sub-flow name="new_subscription_send_email_sub_flow">
         <db:insert config-ref="MySQL_Configuration" doc:name="Insert New Subscription Database">
@@ -20,23 +20,13 @@ VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         </db:insert>
         <set-payload value="Confirm your subscription here: http://localhost:8081/confirm_by_email/?email=#[flowVars.email]" doc:name="Set Payload Message Subscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Subscribe" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
-        <db:update config-ref="MySQL_Configuration" doc:name="Update Number of Emails Sent">
-            <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
-        </db:update>
     </sub-flow>
-    <flow name="web_new_subscription_flow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/web_subscribe" doc:name="HTTP"/>
-        <logger level="INFO" doc:name="Logger"/>
-        <set-payload value="Hello #[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)], you successfully subscribed to #[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]." doc:name="Set Payload"/>
-        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.get(&quot;email&quot;)]" doc:name="Variable Email"/>
-        <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.get(&quot;course&quot;)]" doc:name="Variable Course"/>
-    	<flow-ref name="new_subscription_send_email_sub_flow" doc:name="new_subscription_send_email_sub_flow"/>
-    </flow>
     <flow name="soap_new_subscription_flow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_subscribe" doc:name="HTTP"/>
-        <cxf:jaxws-service serviceClass="assignment3.MyWebService" doc:name="CXF"/>
-        <component doc:name="Java">
-            <singleton-object class="assignment3.MyWebService"/>
-        </component>
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_subscribe" doc:name="HTTP" allowedMethods="GET,POST"/>
+        <cxf:jaxws-service serviceClass="soap.Subscription" doc:name="CXF"/>
+        <custom-transformer returnClass="java.util.HashMap" class="soap.PutSubscription" doc:name="Java"/>
+        <set-variable variableName="course" value="#[message.payload['course']]" doc:name="Variable Course"/>
+        <set-variable variableName="email" value="#[message.payload['email']]" doc:name="Variable Email"/>
+        <flow-ref name="new_subscription_send_email_sub_flow" doc:name="new_subscription_send_email_sub_flow"/>
     </flow>
 </mule>

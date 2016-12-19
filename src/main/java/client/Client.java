@@ -2,6 +2,11 @@ package client;
 
 import java.util.*;
 
+import artifact_subscription.SubscriptionService;
+import artifact_subscription.Subscription;
+import artifact_unsubscription.UnsubscriptionService;
+import artifact_unsubscription.Unsubscription;
+
 public class Client {
 	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
@@ -23,7 +28,6 @@ public class Client {
 			} while(option < 0 || option > 3);
 			if (option == 1){
 				new_subscription();
-				break;
 			}
 			else if (option == 2){
 				delete_subscription();
@@ -35,7 +39,7 @@ public class Client {
 				System.exit(0);
 			}
 		}
-		sc.close();
+	
 	}
 	
 	public static void new_subscription(){
@@ -44,6 +48,13 @@ public class Client {
 		email = sc.nextLine();
 		System.out.println("Insert the course you want to subscribe: ");
 		course = sc.nextLine();
+	
+		SubscriptionService as = new SubscriptionService();
+		Subscription asp = as.getSubscriptionPort();
+		
+		asp.setParams(email, course);
+		
+		
 	}
 	
 	public static void delete_subscription(){
@@ -52,5 +63,10 @@ public class Client {
 		email = sc.nextLine();
 		System.out.println("Insert the course you want to unsubscribe: ");
 		course = sc.nextLine();
+		
+		UnsubscriptionService as = new UnsubscriptionService();
+		Unsubscription asp = as.getUnsubscriptionPort();
+		
+		asp.setParams(email, course);
 	}
 }
