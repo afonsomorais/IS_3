@@ -16,10 +16,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
             <db:parameterized-query><![CDATA[SELECT * FROM statistics LIMIT 1;]]></db:parameterized-query>
         </db:select>
         <logger message="Database msg #[message.payload]" level="INFO" doc:name="Logger"/>
-        <set-variable variableName="course" value="#[message.payload.'emails_n_d']" doc:name="Variable Emails Day"/>
-        <set-variable variableName="course" value="#[message.payload.'emails_n_e']" doc:name="Variable Emails Ever"/>
-        <set-variable variableName="course" value="#[message.payload.'courses_n']" doc:name="Variable Courses"/>
-        <set-payload value="Statistics: #[flowVars.emails_n_d] daily mails, #[flowVars.emails_n_e] mails since ever, #[flowVars.courses] courses" doc:name="Set Payload Message Twitter"/>
+        <set-payload value="Statistics: #[message.payload[0].emails_n_d] daily mails, #[message.payload[0].emails_n_e] mails since ever, #[message.payload[0].courses_e] courses" doc:name="Set Payload Message Twitter"/>
         <logger message="twitter input: #[message.payload]" level="INFO" doc:name="Logger"/>
         <twitter:update-status config-ref="Twitter__Configuration" status="#[message.payload]" doc:name="Twitter"/>
         <logger message="twitter message: #[message.payload]" level="INFO" doc:name="Logger"/>

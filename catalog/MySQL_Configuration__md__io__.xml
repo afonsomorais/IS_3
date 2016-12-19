@@ -18,12 +18,6 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -36,13 +30,19 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -63,12 +63,6 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -81,13 +75,19 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -108,12 +108,6 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -126,13 +120,19 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -153,12 +153,6 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -171,13 +165,19 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -198,12 +198,6 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -216,13 +210,19 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -249,12 +249,6 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -267,13 +261,19 @@ VALUES (#[flowVars.email], #[flowVars.course])</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -295,12 +295,6 @@ VALUES (</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -313,13 +307,19 @@ VALUES (</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -339,12 +339,6 @@ VALUES (email, course)</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -357,13 +351,19 @@ VALUES (email, course)</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -385,12 +385,6 @@ VALUES (email, course)</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -403,13 +397,19 @@ VALUES (email, course)</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -430,12 +430,6 @@ VALUES (email, course)</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -448,13 +442,19 @@ VALUES (email, course)</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -476,12 +476,6 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -494,13 +488,19 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -521,12 +521,6 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -539,13 +533,19 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -567,12 +567,6 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -585,13 +579,19 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -697,12 +697,6 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -715,13 +709,19 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -822,12 +822,6 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -840,13 +834,19 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -947,12 +947,6 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -965,13 +959,19 @@ VALUES (#[message.inboundProperties.&apos;http.query.params&apos;.get(&quot;emai
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -998,12 +998,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1016,13 +1010,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1043,12 +1043,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1061,13 +1055,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1088,12 +1088,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1106,13 +1100,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1133,12 +1133,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1151,13 +1145,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1178,12 +1178,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1196,13 +1190,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1223,12 +1223,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1241,13 +1235,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1268,12 +1268,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1286,13 +1280,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
@@ -1313,12 +1313,6 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
               </payload>
               <properties>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
-                  <org.mule.common.metadata.MetaDataProperties>
-                    <fields/>
-                  </org.mule.common.metadata.MetaDataProperties>
-                </entry>
-                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
@@ -1331,13 +1325,19 @@ UPDATE statistics SET emails_n_e = emails_n_e + 1;</string>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
                   <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
                 <entry>
-                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
                   <org.mule.common.metadata.MetaDataProperties>
                     <fields/>
                   </org.mule.common.metadata.MetaDataProperties>
