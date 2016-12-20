@@ -10,11 +10,16 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
-    <sub-flow name="remove_subscription_send_email_sub_flow">
+    <flow name="remove_subscriptionFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/removesubscription/" allowedMethods="GET, POST" doc:name="HTTP"/>
+        <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.course]" doc:name="Variable Course"/>
+        <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.email]" doc:name="Variable Email"/>
         <db:delete config-ref="MySQL_Configuration" doc:name="Remove Subscription Database">
-            <db:parameterized-query><![CDATA[DELETE FROM subscribers WHERE email = #[flowVars.email] AND course = #[flowVars.course];]]></db:parameterized-query>
+            <db:parameterized-query><![CDATA[DELETE FROM subscribers WHERE (email = #[flowVars.email] AND course = #[flowVars.course]);]]></db:parameterized-query>
         </db:delete>
-        <set-payload value="Confirm your unsubscription here: http://localhost:8081/remove_by_email/?email=#[flowVars.email]" doc:name="Set Payload Message Unsubscription"/>
+    </flow>
+    <sub-flow name="remove_subscription_send_email_sub_flow">
+        <set-payload value="Confirm your unsubscription here: http://localhost:8081/removesubscription/?email=#[flowVars.email]&amp;course=#[flowVars.course]" doc:name="Set Payload Message Unsubscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Unsubscribe" responseTimeout="10000" doc:name="Remove Subscription Verification"/>
     </sub-flow>
     <flow name="soap_remove_subscription_flow">

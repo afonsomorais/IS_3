@@ -6,6 +6,8 @@ import artifact_subscription.SubscriptionService;
 import artifact_subscription.Subscription;
 import artifact_unsubscription.UnsubscriptionService;
 import artifact_unsubscription.Unsubscription;
+import artifact_list.ListSubscriptions;
+import artifact_list.ListSubscriptionsService;
 
 public class Client {
 	static Scanner sc = new Scanner(System.in);
@@ -66,9 +68,13 @@ public class Client {
 		Unsubscription asp = as.getUnsubscriptionPort();
 		
 		asp.setParams(email, course);
+		
 	}
 	
 	public static void list_subscriptions(){
+		ListSubscriptionsService as = new ListSubscriptionsService();
+		ListSubscriptions asp = as.getListSubscriptionsPort();
 		
+		System.out.println(asp.getList());
 	}
 }
