@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:json="http://www.mulesoft.org/schema/mule/json"
 	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,13 +10,12 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/current/mule-twitter.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
-http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd">
+http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd
+http://www.mulesoft.org/schema/mule/schedulers http://www.mulesoft.org/schema/mule/schedulers/current/mule-schedulers.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
     <twitter:config name="Twitter__Configuration" accessKey="701969017007906816-rHxaBylFQqUe9il823Vl4JcqBmdLt6H" accessSecret="TVqIrebt7hDjocYndp4h4NQvsokdIwIeESIyf45UaN7vQ" consumerKey="3r5zRELuxYVF7xVrno3cZBgyU" consumerSecret="dOYxtQ24fL5SW9z698HQI7zuHSEpMq84IFcpDKiilefWR2YOaJ" doc:name="Twitter: Configuration"/>
     <quartz:connector name="Quartz" validateConnections="true" doc:name="Quartz"/>
-    <flow name="post_twitter_sub_flow">
-        <quartz:inbound-endpoint jobName="job1" cronExpression="0 0/1 * 1/1 * ? *" repeatInterval="86400000" connector-ref="Quartz" responseTimeout="10000" doc:name="Quartz">
-            <quartz:event-generator-job/>
-        </quartz:inbound-endpoint>
+    <sub-flow name="post_twitter_sub_flow">
         <db:select config-ref="MySQL_Configuration" doc:name="Database Get Statistics">
             <db:parameterized-query><![CDATA[SELECT * FROM statistics LIMIT 1;]]></db:parameterized-query>
         </db:select>
@@ -28,5 +27,22 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
         <db:update config-ref="MySQL_Configuration" doc:name="Edit Daily Mails Database">
             <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = 0;]]></db:parameterized-query>
         </db:update>
+    </sub-flow>
+    <sub-flow name="send_emails_sub_flow">
+        <set-variable variableName="email" value="#[message.payload.'email']" doc:name="Variable Email"/>
+        <set-payload doc:name="Set Payload Mail" value="MENSAGEM DE TESTE"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Daily Update" responseTimeout="10000" doc:name="SMTP Daily Mail"/>
+    </sub-flow>
+    <flow name="post_twitter_flow">
+        <poll doc:name="Poll">
+            <schedulers:cron-scheduler expression="0 0/1 * 1/1 * ? *"/>
+            <db:select config-ref="MySQL_Configuration" doc:name="Database">
+                <db:parameterized-query><![CDATA[SELECT * FROM subscribers WHERE validated = 1;]]></db:parameterized-query>
+            </db:select>
+        </poll>
+        <foreach doc:name="For Each">
+            <flow-ref name="send_emails_sub_flow" doc:name="send_emails_sub_flow"/>
+        </foreach>
+        <flow-ref name="post_twitter_sub_flow" doc:name="post_twitter_sub_flow"/>
     </flow>
 </mule>
