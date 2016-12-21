@@ -35,7 +35,7 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
     </sub-flow>
     <flow name="post_twitter_flow">
         <poll doc:name="Poll">
-            <schedulers:cron-scheduler expression="0 0/1 * 1/1 * ? *"/>
+            <schedulers:cron-scheduler expression="0 0 0 1/1 * ? *"/>
             <db:select config-ref="MySQL_Configuration" doc:name="Database">
                 <db:parameterized-query><![CDATA[SELECT * FROM subscribers WHERE validated = 1;]]></db:parameterized-query>
             </db:select>

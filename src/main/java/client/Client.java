@@ -63,7 +63,6 @@ public class Client {
 		email = sc.nextLine();
 		System.out.print("Insert the course you want to unsubscribe: ");
 		course = sc.nextLine();
-		
 		UnsubscriptionService as = new UnsubscriptionService();
 		Unsubscription asp = as.getUnsubscriptionPort();
 		
