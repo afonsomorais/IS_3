@@ -53,8 +53,10 @@ public class Client {
 		course = sc.nextLine();
 		SubscriptionService as = new SubscriptionService();
 		Subscription asp = as.getSubscriptionPort();
-
+		try{
 			asp.setParams(email, course);
+		}catch(Exception e){};
+		
 
 	}
 	
@@ -66,15 +68,19 @@ public class Client {
 		course = sc.nextLine();
 		UnsubscriptionService as = new UnsubscriptionService();
 		Unsubscription asp = as.getUnsubscriptionPort();
+		try{
+			asp.setParams(email, course);
+		}catch(Exception e){}
 		
-		asp.setParams(email, course);
 		
 	}
 	
 	public static void list_subscriptions(){
 		ListSubscriptionsService as = new ListSubscriptionsService();
 		ListSubscriptions asp = as.getListSubscriptionsPort();
-		
-		System.out.println(asp.getList());
+		try{
+			System.out.println(asp.getList());
+		}catch(Exception e){
+		}
 	}
 }
