@@ -18,7 +18,6 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
         <foreach doc:name="For Each" collection="#[message.payload]">
             <logger message="Student name: #[message.payload.email] and course : #[message.payload.courses.name]" level="INFO" doc:name="Logger"/>
             <set-variable variableName="email" value="#[message.payload.email]" doc:name="Variable Email"/>
-            <logger message="Correct on subscribers_course" level="INFO" doc:name="Logger"/>
             <foreach collection="#[message.payload.courses]" doc:name="For Each">
                 <db:insert config-ref="MySQL_Configuration" doc:name="Database">
                     <db:parameterized-query><![CDATA[INSERT IGNORE INTO subscribers_course (email_subscriber, name_course, validated)
@@ -30,6 +29,7 @@ VALUES (#[flowVars.email], #[message.payload.name], 1)]]></db:parameterized-quer
 VALUES (#[flowVars.email])]]></db:parameterized-query>
             </db:insert>
         </foreach>
+        <logger message="Insert on database successful" level="INFO" doc:name="Logger"/>
         <!-- <object-to-string-transformer doc:name="Object to String"/> -->
         <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
     </sub-flow>

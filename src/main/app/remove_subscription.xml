@@ -32,5 +32,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <set-variable variableName="course" value="#[message.payload['course']]" doc:name="Variable Course"/>
         <set-variable variableName="email" value="#[message.payload['email']]" doc:name="Variable Email"/>
         <flow-ref name="remove_subscription_send_email_sub_flow" doc:name="remove_subscription_send_email_sub_flow"/>
+    	<exception-strategy ref="Global_Catch_Exception_Strategy" doc:name="Reference Exception Strategy"/>
     </flow>
 </mule>

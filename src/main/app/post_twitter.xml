@@ -36,6 +36,7 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
             <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
             <set-variable variableName="email" value="#[message.payload.'email_subscriber']" doc:name="Variable Email"/>
             <set-payload value="Dear mr. #[message.payload.'email_subscriber'], there are no changes on your courses." doc:name="Set Payload Mail"/>
+            <logger message="Message: #[message.payload]" level="INFO" doc:name="Logger"/>
             <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Daily Update" responseTimeout="10000" doc:name="SMTP Daily Mail"/>
             <db:update config-ref="MySQL_Configuration" doc:name="Update Mails Sent Database">
                 <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
