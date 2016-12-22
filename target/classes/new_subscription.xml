@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
-http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
     <db:mysql-config name="MySQL_Configuration" host="localhost" port="3306" user="test"  database="subscriptiondb" doc:name="MySQL Configuration" password="test"/>
     <smtp:gmail-connector name="Gmail"  validateConnections="true" doc:name="Gmail"/>
@@ -18,6 +17,7 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
             <db:parameterized-query><![CDATA[INSERT INTO subscribers (email)
 VALUES (#[flowVars.email])]]></db:parameterized-query>
         </db:insert>
+        <logger message="Insertion: '#[message.payload]'" level="INFO" doc:name="Logger"/>
         <flow-ref name="new_subscription_sub_flow" doc:name="new_subscription_sub_flow"/>
     </sub-flow>
     <sub-flow name="new_subscription_sub_flow">
@@ -28,9 +28,11 @@ VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         <set-payload value="Confirm your subscription here: http://localhost:8081/validatesubscription/?email=#[flowVars.email]&amp;course=#[flowVars.course]" doc:name="Set Payload Message Subscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Subscribe" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
         <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
+        <logger message="Email verification: '#[message.payload]'" level="INFO" doc:name="Logger"/>
         <db:update config-ref="MySQL_Configuration" doc:name="Update Emails Sent Database">
             <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
         </db:update>
+        <logger message="Database updated" level="INFO" doc:name="Logger"/>
     </sub-flow>
     <flow name="new_subscription_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/validatesubscription/" doc:name="HTTP" allowedMethods="GET, POST"/>

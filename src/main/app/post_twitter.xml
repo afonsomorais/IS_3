@@ -20,7 +20,7 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
             <db:parameterized-query><![CDATA[SELECT * FROM statistics LIMIT 1;]]></db:parameterized-query>
         </db:select>
         <logger message="Database msg #[message.payload]" level="INFO" doc:name="Logger"/>
-        <set-payload value="Statistics: #[message.payload[0].emails_n_d] daily mails, #[message.payload[0].emails_n_e] mails since ever, #[message.payload[0].courses_n] courses" doc:name="Set Payload Message Twitter"/>
+        <set-payload value="Statistics: #[message.payload[0].emails_n_d] daily mails, #[message.payload[0].emails_n_e] mails since ever, #[flowVars.courses_number] courses" doc:name="Set Payload Message Twitter"/>
         <logger message="twitter input: #[message.payload]" level="INFO" doc:name="Logger"/>
         <twitter:update-status config-ref="Twitter__Configuration" status="#[message.payload]" doc:name="Twitter"/>
         <logger message="twitter message: #[message.payload]" level="INFO" doc:name="Logger"/>
@@ -41,15 +41,20 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
                 <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
             </db:update>
         </foreach>
+        <db:select config-ref="MySQL_Configuration" doc:name="Count Courses Database">
+            <db:parameterized-query><![CDATA[SELECT COUNT(DISTINCT name_course) AS TOTAL
+FROM subscribers_course;]]></db:parameterized-query>
+        </db:select>
+        <set-variable variableName="courses_number" value="#[message.payload[0].TOTAL]" doc:name="number_courses"/>
         <flow-ref name="post_twitter_sub_flow" doc:name="post_twitter_sub_flow"/>
     </sub-flow>
     <flow name="post_twitter_flow">
         <poll doc:name="Poll">
-            <schedulers:cron-scheduler expression="0 0/1 * 1/1 * ? *"/>
+            <schedulers:cron-scheduler expression="0 0 0 1/1 * ? *"/>
             <flow-ref name="get_students_sub_flow" doc:name="get_students_sub_flow"/>
         </poll>
         <flow-ref name="get_emails_sub_flow" doc:name="get_emails_sub_flow"/>
-        <catch-exception-strategy enableNotifications="false" logException="false" doc:name="Catch Exception Strategy">
+        <catch-exception-strategy   doc:name="Catch Exception Strategy">
             <logger message="Already created" level="INFO" doc:name="Logger"/>
             <flow-ref name="get_emails_sub_flow" doc:name="get_emails_sub_flow"/>
         </catch-exception-strategy>

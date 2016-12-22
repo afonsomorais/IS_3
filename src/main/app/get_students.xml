@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
         <!-- <http:listener config-ref="HTTP_Listener_Configuration" path="/getstudents" allowedMethods="GET" doc:name="HTTP"/>-->
         <http:request config-ref="HTTP_Request_Configuration" path="Project-WEB/rest/project3webservices/getstudents" method="GET" sendBodyMode="ALWAYS" doc:name="HTTP"/>
         <json:json-to-object-transformer returnClass="java.lang.Object" doc:name="JSON to Object"/>
-        <foreach doc:name="For Each">
+        <foreach doc:name="For Each" collection="#[message.payload]">
             <logger message="Student name: #[message.payload.email] and course : #[message.payload.courses.name]" level="INFO" doc:name="Logger"/>
             <set-variable variableName="email" value="#[message.payload.email]" doc:name="Variable Email"/>
             <logger message="Correct on subscribers_course" level="INFO" doc:name="Logger"/>
