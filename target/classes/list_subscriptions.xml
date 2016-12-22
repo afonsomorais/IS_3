@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
     <flow name="soap_list_subscription_flow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_list_subscriptions" allowedMethods="GET,POST" doc:name="HTTP"/>
+       <http:listener config-ref="HTTP_Listener_Configuration" path="/soap_list_subscriptions" allowedMethods="GET,POST" doc:name="HTTP"/>
         <cxf:jaxws-service serviceClass="soap.ListSubscriptions" doc:name="CXF"/>
         <db:select config-ref="MySQL_Configuration" doc:name="Database">
             <db:parameterized-query><![CDATA[SELECT * FROM subscribers;]]></db:parameterized-query>

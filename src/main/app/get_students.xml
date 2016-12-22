@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
     <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8080" doc:name="HTTP Request Configuration"/>
-    <flow name="get_students_flow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/getstudents" allowedMethods="GET" doc:name="HTTP"/>
+    <sub-flow name="get_students_sub_flow">
+        <!-- <http:listener config-ref="HTTP_Listener_Configuration" path="/getstudents" allowedMethods="GET" doc:name="HTTP"/>-->
         <http:request config-ref="HTTP_Request_Configuration" path="Project-WEB/rest/project3webservices/getstudents" method="GET" sendBodyMode="ALWAYS" doc:name="HTTP"/>
-        <object-to-string-transformer doc:name="Object to String"/>
-        <logger message="Students: #[message.payload]" level="INFO" doc:name="Logger"/>
+        <json:json-to-object-transformer returnClass="java.lang.Object" doc:name="JSON to Object"/>
+        <foreach doc:name="For Each">
+            <logger message="Student name: #[message.payload.email] and course : #[message.payload.courses.name]" level="INFO" doc:name="Logger"/>
+            <set-variable variableName="email" value="#[message.payload.email]" doc:name="Variable Email"/>
+            <logger message="Correct on subscribers_course" level="INFO" doc:name="Logger"/>
+            <foreach collection="#[message.payload.courses]" doc:name="For Each">
+                <db:insert config-ref="MySQL_Configuration" doc:name="Database">
+                    <db:parameterized-query><![CDATA[INSERT IGNORE INTO subscribers_course (email_subscriber, name_course, validated)
+VALUES (#[flowVars.email], #[message.payload.name], 1)]]></db:parameterized-query>
+                </db:insert>
+            </foreach>
+            <db:insert config-ref="MySQL_Configuration" doc:name="Database">
+                <db:parameterized-query><![CDATA[INSERT INTO subscribers (email)
+VALUES (#[flowVars.email])]]></db:parameterized-query>
+            </db:insert>
+        </foreach>
+        <!-- <object-to-string-transformer doc:name="Object to String"/> -->
         <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
-    </flow>
+    </sub-flow>
 </mule>

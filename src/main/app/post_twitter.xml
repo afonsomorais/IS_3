@@ -28,21 +28,30 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
             <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = 0;]]></db:parameterized-query>
         </db:update>
     </sub-flow>
-    <sub-flow name="send_emails_sub_flow">
-        <set-variable variableName="email" value="#[message.payload.'email']" doc:name="Variable Email"/>
-        <set-payload doc:name="Set Payload Mail" value="MENSAGEM DE TESTE"/>
-        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Daily Update" responseTimeout="10000" doc:name="SMTP Daily Mail"/>
+    <sub-flow name="get_emails_sub_flow">
+         <db:select config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[SELECT * FROM subscribers_course WHERE validated = 1;]]></db:parameterized-query>
+         </db:select>
+        <foreach doc:name="For Each">
+            <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
+            <set-variable variableName="email" value="#[message.payload.'email_subscriber']" doc:name="Variable Email"/>
+            <set-payload value="Dear mr. #[message.payload.'email_subscriber'], there are no changes on your courses." doc:name="Set Payload Mail"/>
+            <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Daily Update" responseTimeout="10000" doc:name="SMTP Daily Mail"/>
+            <db:update config-ref="MySQL_Configuration" doc:name="Update Mails Sent Database">
+                <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
+            </db:update>
+        </foreach>
+        <flow-ref name="post_twitter_sub_flow" doc:name="post_twitter_sub_flow"/>
     </sub-flow>
     <flow name="post_twitter_flow">
         <poll doc:name="Poll">
-            <schedulers:cron-scheduler expression="0 0 0 1/1 * ? *"/>
-            <db:select config-ref="MySQL_Configuration" doc:name="Database">
-                <db:parameterized-query><![CDATA[SELECT * FROM subscribers WHERE validated = 1;]]></db:parameterized-query>
-            </db:select>
+            <schedulers:cron-scheduler expression="0 0/1 * 1/1 * ? *"/>
+            <flow-ref name="get_students_sub_flow" doc:name="get_students_sub_flow"/>
         </poll>
-        <foreach doc:name="For Each">
-            <flow-ref name="send_emails_sub_flow" doc:name="send_emails_sub_flow"/>
-        </foreach>
-        <flow-ref name="post_twitter_sub_flow" doc:name="post_twitter_sub_flow"/>
+        <flow-ref name="get_emails_sub_flow" doc:name="get_emails_sub_flow"/>
+        <catch-exception-strategy enableNotifications="false" logException="false" doc:name="Catch Exception Strategy">
+            <logger message="Already created" level="INFO" doc:name="Logger"/>
+            <flow-ref name="get_emails_sub_flow" doc:name="get_emails_sub_flow"/>
+        </catch-exception-strategy>
     </flow>
 </mule>

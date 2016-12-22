@@ -7,28 +7,36 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class Student implements Serializable {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Student{
+
+ @JsonProperty("id") 
  private int id;
+ @JsonProperty("name")
  private String name;
+ @JsonProperty("password")
  private String password;
+ @JsonProperty("email")
  private String email;
+ @JsonProperty("alternativeEmail")
  private String alternativeEmail;
+ @JsonProperty("address")
  private String address;
+ @JsonProperty("telephone")
  private int telephone;
+ @JsonProperty("studentID")
  private int studentID;
+ @JsonProperty("startYear")
  private int startYear;
+ @JsonProperty("Birth")
  private Date birth;
- 
+
+ @JsonProperty("courses")
 private List<Course> courses;
 
-  
- public Student() {
-  super();
- }
 
  public Student(String name, Date birth, String email,String alternativeEmail,String address,int telephone, int studentID , int startYear, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-  super();
   this.name = name;
   this.birth = birth;
   this.email = email;

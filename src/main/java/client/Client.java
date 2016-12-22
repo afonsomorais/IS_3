@@ -54,7 +54,11 @@ public class Client {
 		SubscriptionService as = new SubscriptionService();
 		Subscription asp = as.getSubscriptionPort();
 		
-		asp.setParams(email, course);
+		try {
+			asp.setParams(email, course);
+		}catch(Exception e){
+			
+		}
 	}
 	
 	public static void delete_subscription(){

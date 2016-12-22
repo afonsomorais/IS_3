@@ -7,11 +7,11 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
-    <flow name="Copy_of_get_students_flow">
+    <flow name="get_materials_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/getmaterials" allowedMethods="GET" doc:name="HTTP"/>
         <http:request config-ref="HTTP_Request_Configuration" path="Project-WEB/rest/project3webservices/getmaterials" method="GET" sendBodyMode="ALWAYS" doc:name="HTTP"/>
         <object-to-string-transformer doc:name="Object to String"/>
         <logger message="Students: #[message.payload]" level="INFO" doc:name="Logger"/>
-        <set-payload value="'#[message.payload]'" doc:name="Payload"/>
+        <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
     </flow>
 </mule>

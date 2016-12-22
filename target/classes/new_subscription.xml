@@ -15,19 +15,29 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
     <smtp:gmail-connector name="Gmail"  validateConnections="true" doc:name="Gmail"/>
     <sub-flow name="new_subscription_send_email_sub_flow">
         <db:insert config-ref="MySQL_Configuration" doc:name="Insert New Subscription Database">
-            <db:parameterized-query><![CDATA[INSERT INTO subscribers (email, course)
+            <db:parameterized-query><![CDATA[INSERT INTO subscribers (email)
+VALUES (#[flowVars.email])]]></db:parameterized-query>
+        </db:insert>
+        <flow-ref name="new_subscription_sub_flow" doc:name="new_subscription_sub_flow"/>
+    </sub-flow>
+    <sub-flow name="new_subscription_sub_flow">
+        <db:insert config-ref="MySQL_Configuration" doc:name="Insert new relation Database">
+            <db:parameterized-query><![CDATA[INSERT IGNORE INTO subscribers_course (email_subscriber, name_course)
 VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         </db:insert>
         <set-payload value="Confirm your subscription here: http://localhost:8081/validatesubscription/?email=#[flowVars.email]&amp;course=#[flowVars.course]" doc:name="Set Payload Message Subscription"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="issubscribertest@gmail.com" password="Ruizinho69" connector-ref="Gmail" to="#[flowVars.email]" from="issubscribertest" subject="Subscribe" responseTimeout="10000" doc:name="SMTP Subscription Verification"/>
         <set-payload value="'#[message.payload]'" doc:name="Set Payload"/>
+        <db:update config-ref="MySQL_Configuration" doc:name="Update Emails Sent Database">
+            <db:parameterized-query><![CDATA[UPDATE statistics SET emails_n_d = emails_n_d + 1, emails_n_e = emails_n_e + 1;]]></db:parameterized-query>
+        </db:update>
     </sub-flow>
     <flow name="new_subscription_flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/validatesubscription/" doc:name="HTTP" allowedMethods="GET, POST"/>
         <set-variable variableName="course" value="#[message.inboundProperties.'http.query.params'.course]" doc:name="Variable Course"/>
         <set-variable variableName="email" value="#[message.inboundProperties.'http.query.params'.email]" doc:name="Variable Email"/>
         <db:update config-ref="MySQL_Configuration" doc:name="Validate Subscription Database">
-            <db:parameterized-query><![CDATA[UPDATE subscribers SET validated = 1 WHERE (email = #[flowVars.email] AND course = #[flowVars.course]);]]></db:parameterized-query>
+            <db:parameterized-query><![CDATA[UPDATE subscribers_course SET validated = 1 WHERE (email_subscriber = #[flowVars.email] AND name_course = #[flowVars.course]);]]></db:parameterized-query>
         </db:update>
     </flow>
     <flow name="soap_new_subscription_flow">
@@ -37,5 +47,9 @@ VALUES (#[flowVars.email], #[flowVars.course])]]></db:parameterized-query>
         <set-variable variableName="course" value="#[message.payload['course']]" doc:name="Variable Course"/>
         <set-variable variableName="email" value="#[message.payload['email']]" doc:name="Variable Email"/>
         <flow-ref name="new_subscription_send_email_sub_flow" doc:name="new_subscription_send_email_sub_flow"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy" enableNotifications="false" logException="false">
+            <logger message="Already created" level="INFO" doc:name="Logger"/>
+            <flow-ref name="new_subscription_sub_flow" doc:name="new_subscription_sub_flow"/>
+        </catch-exception-strategy>
     </flow>
 </mule>
